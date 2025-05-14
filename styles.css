@@ -1,0 +1,58 @@
+.domFinder-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2147483647;
+}
+
+.domFinder-highlight {
+  position: absolute;
+  background: rgba(102, 0, 255, 0.261);
+  border: 2px solid rgba(102, 0, 255, 0.8);
+  pointer-events: none;
+  cursor: default;
+  transition: all 0.15s ease;
+}
+
+.domFinder-elementInfo {
+  width: 22rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: #fff;
+  padding: 12px;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  z-index: 2147483647;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+  border-radius: 8px;
+}
+
+.domFinder-elementInfo .info-box {
+  margin-bottom: 15px;
+}
+
+.domFinder-elementInfo .info-box h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.domFinder-elementInfo .info-box ul {
+  list-style: none;
+}
+
+.domFinder-elementInfo .info-box ul li {
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.domFinder-elementInfo .info-box ul li strong {
+  color: #555;
+}

@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "DomFinder",
+  "description": "Inspect elements on hover.",
+  "version": "1.0",
+  "permissions": ["scripting", "activeTab", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Activate DomFinder"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["styles.css"]
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  }
+}
