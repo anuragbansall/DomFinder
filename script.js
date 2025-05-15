@@ -2,10 +2,19 @@ if (!window.domFinderInjected) {
   window.domFinderInjected = true;
 
   window.cleanupDomFinder = () => {
-    document.querySelector(".domFinder-container")?.remove();
+    // Remove the highlight and element info boxes
+    if (window.highlight) {
+      window.highlight.remove();
+    }
+    if (window.elementInfo) {
+      window.elementInfo.remove();
+    }
+
+    // Remove event listeners
     document.removeEventListener("mouseover", window.handleMouseOver);
     document.removeEventListener("mousemove", window.displayElementInfo);
     document.removeEventListener("click", window.handleClick);
+    document.removeEventListener("keyup", window.handleKeyPress);
 
     window.isLocked = false;
     window.selectedElement = null;
@@ -111,5 +120,5 @@ if (!window.domFinderInjected) {
   document.addEventListener("mouseover", window.handleMouseOver, true);
   document.addEventListener("mousemove", window.displayElementInfo, true);
   document.addEventListener("click", window.handleClick, true);
-  document.addEventListener("keypress", window.handleKeyPress, true);
+  document.addEventListener("keyup", window.handleKeyPress, true);
 }
