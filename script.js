@@ -17,36 +17,47 @@ if (!window.domFinderInjected) {
   window.isLocked = false;
   window.selectedElement = null;
 
-  const domFinderContainer = document.createElement("div");
-  domFinderContainer.className = "domFinder-container";
-  document.body.appendChild(domFinderContainer);
-
   window.highlight = document.createElement("div");
   window.highlight.className = "domFinder-highlight";
-  domFinderContainer.appendChild(window.highlight);
+  document.body.appendChild(window.highlight);
 
   window.elementInfo = document.createElement("div");
   window.elementInfo.className = "domFinder-elementInfo";
-  domFinderContainer.appendChild(window.elementInfo);
+  document.body.appendChild(window.elementInfo);
 
+  // Handle mouse over
   window.handleMouseOver = (event) => {
-    if (window.isLocked) return;
+    if (window.isLocked) return; // Prevent changes when locked
     window.selectedElement = event.target;
     const rect = window.selectedElement.getBoundingClientRect();
     window.highlight.style.width = `${rect.width}px`;
     window.highlight.style.height = `${rect.height}px`;
-    window.highlight.style.left = `${rect.left}px`;
-    window.highlight.style.top = `${rect.top}px`;
+    window.highlight.style.left = `${rect.left + window.scrollX}px`;
+    window.highlight.style.top = `${rect.top + window.scrollY}px`;
   };
 
+  // Handle click to toggle lock
   window.handleClick = () => {
     if (!window.selectedElement) return;
     window.isLocked = !window.isLocked;
-    window.highlight.style.position = window.isLocked ? "fixed" : "absolute";
+
+    window.highlight.className = window.isLocked
+      ? "domFinder-highlight locked"
+      : "domFinder-highlight";
   };
 
+  // Handle user press "L" key to lock/unlock
+  window.handleKeyPress = (event) => {
+    if (event.key === "l" || event.key === "L") {
+      window.isLocked = !window.isLocked;
+      window.highlight.className = window.isLocked
+        ? "domFinder-highlight locked"
+        : "domFinder-highlight";
+    }
+  };
+
+  // Display element info
   window.displayElementInfo = () => {
-    if (window.isLocked) return;
     if (!window.selectedElement) return;
 
     const style = getComputedStyle(window.selectedElement);
@@ -96,7 +107,9 @@ if (!window.domFinderInjected) {
     `;
   };
 
+  // Event listeners
   document.addEventListener("mouseover", window.handleMouseOver, true);
   document.addEventListener("mousemove", window.displayElementInfo, true);
   document.addEventListener("click", window.handleClick, true);
+  document.addEventListener("keypress", window.handleKeyPress, true);
 }

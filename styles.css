@@ -1,13 +1,3 @@
-.domFinder-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 2147483647;
-}
-
 .domFinder-highlight {
   position: absolute;
   background: rgba(102, 0, 255, 0.261);
@@ -17,9 +7,14 @@
   transition: all 0.15s ease;
 }
 
+.domFinder-highlight.locked {
+  background: rgba(255, 60, 0, 0.261);
+  border: 2px solid rgba(255, 60, 0, 0.8);
+}
+
 .domFinder-elementInfo {
   width: 22rem;
-  max-height: 70vh;
+  max-height: 90vh;
   overflow-y: auto;
   position: fixed;
   bottom: 15px;
@@ -32,6 +27,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   pointer-events: auto;
   border-radius: 8px;
+}
+
+.domFinder-elementInfo h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .domFinder-elementInfo .info-box {
